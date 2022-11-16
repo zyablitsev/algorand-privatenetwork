@@ -1,0 +1,6 @@
+{
+  "EndpointAddress": ":4001",
+  "EnableDeveloperAPI": true,
+  "GossipFanout": 1,
+  "DNSBootstrapID": ""
+}
