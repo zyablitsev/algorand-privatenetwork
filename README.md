@@ -32,6 +32,7 @@ make commands:
   account-list        -> list of algorand accounts on this machine.
 
   kmd-start           -> start kmd service.
+  kmd-stop            -> stop kmd service.
 
   pgschema-install    -> create postgres database for indexer.
   pgschema-uninstall  -> remove indexer database.
