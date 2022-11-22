@@ -61,11 +61,9 @@ network-start: network-stop
 	${v_bin_dir}/goal network start \
 		-r ${v_data_dir}/privatenetwork/
 
-network-stop:
+network-stop: kmd-stop
 	${v_bin_dir}/goal network stop \
 		-r ${v_data_dir}/privatenetwork/ 2>/dev/null || true
-	${v_bin_dir}/goal kmd stop \
-		-d ${v_data_dir}/privatenetwork/Node/ 2>/dev/null || true
 
 network-delete: network-stop
 	${v_bin_dir}/goal network delete \
@@ -80,9 +78,13 @@ account-list:
 		-d ${v_data_dir}/privatenetwork/Node
 
 kmd-start:
-	${v_bin_dir}/kmd start \
+	${v_bin_dir}/goal kmd start \
 		-t 0 \
-		-d ${v_data_dir}/privatenetwork/Node/kmd-v0.5
+		-d ${v_data_dir}/privatenetwork/Node
+
+kmd-stop:
+	${v_bin_dir}/goal kmd stop \
+		-d ${v_data_dir}/privatenetwork/Node 2>/dev/null || true
 
 pgschema-install: pgschema-uninstall
 	@cd ./postgres/ && \
