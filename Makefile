@@ -40,7 +40,7 @@ binaries-clean:
 network-create: network-stop network-delete
 	${v_bin_dir}/goal network create \
 		-r ${v_data_dir}/privatenetwork/ \
-		-n private \
+		-n sandnet \
 		-t ./template.json
 	cp node-config.json ${v_data_dir}/privatenetwork/Node/config.json
 	echo "${v_algod_token}" > \
@@ -113,7 +113,7 @@ pgschema-uninstall:
 indexer-start:
 	${v_bin_dir}/algorand-indexer daemon \
 		--algod-net 127.0.0.1:4001 \
-		--algod-token "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" \
+		--algod-token "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" \
 		--data-dir "${v_data_dir}/privatenetwork/Node" \
 		--postgres "host=${v_pg_host} port=${v_pg_port} user=${v_pg_dbuser} password=${v_pg_dbpass} dbname=${v_pg_dbname}"
 
