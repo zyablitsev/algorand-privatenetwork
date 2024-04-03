@@ -6,6 +6,7 @@ endif
 v_bin_dir=$(or ${BIN_DIR},${bin_dir})
 v_tmp_dir=$(or ${TMP_DIR},${tmp_dir})
 v_data_dir=$(or ${DATA_DIR},${data_dir})
+v_conduit_data_dir=$(or ${CONDUIT_DATA_DIR},${conduit_data_dir})
 v_update_script_uri=$(or ${UPDATE_SCRIPT_URI},${update_script_uri})
 v_algod_net=$(or ${ALGOD_NET},${algod_net})
 v_algod_token=$(or ${ALGOD_TOKEN},${algod_token})
@@ -50,9 +51,9 @@ network-create: network-stop network-delete
 	echo "${v_algod_admin_token}" > \
 		${v_data_dir}/privatenetwork/Node/algod.admin.token
 	echo "${v_algod_token}" > \
-		${v_data_dir}/privatenetwork/Primary/algod.token
+		${v_data_dir}/privatenetwork/Follower/algod.token
 	echo "${v_algod_admin_token}" > \
-		${v_data_dir}/privatenetwork/Primary/algod.admin.token
+		${v_data_dir}/privatenetwork/Follower/algod.admin.token
 	echo "${v_kmd_token}" > \
 		${v_data_dir}/privatenetwork/Node/kmd-v0.5/kmd_config.json
 	cp kmd_config.json ${v_data_dir}/privatenetwork/Node/kmd-v0.5/kmd_config.json
@@ -112,14 +113,21 @@ pgschema-uninstall:
 		PG_DBPASS="${v_pg_dbpass}" \
 		./uninstall.sh
 
+conduit-clean:
+	rm -rf ${v_conduit_data_dir}/exporter_postgresql/ 2>/dev/null || true
+	rm -rf ${v_conduit_data_dir}/importer_algod/ 2>/dev/null || true
+	rm -f ${v_conduit_data_dir}/metadata.json 2>/dev/null || true
+
+conduit-start: conduit-clean
+	${v_bin_dir}/conduit -d ${v_conduit_data_dir}
+
 indexer-start:
 	${v_bin_dir}/algorand-indexer daemon \
-		--algod-net 127.0.0.1:4001 \
-		--algod-token "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" \
-		--data-dir "${v_data_dir}/privatenetwork/Node" \
+		--token "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" \
+		--data-dir "${v_data_dir}/indexer" \
 		--postgres "host=${v_pg_host} port=${v_pg_port} user=${v_pg_dbuser} password=${v_pg_dbpass} dbname=${v_pg_dbname}"
 
 clean-data: network-delete
 	rm -rf ${v_data_dir}/ 2>/dev/null || true
 
-clean: clean-data binaries-clean pgschema-uninstall
+clean: conduit-clean clean-data binaries-clean pgschema-uninstall

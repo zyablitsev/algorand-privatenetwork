@@ -1,6 +1,7 @@
 bin_dir=./bin
 tmp_dir=./tmp
 data_dir=./data
+conduit_data_dir=./conduit_data
 update_script_uri=https://raw.githubusercontent.com/algorand/go-algorand-doc/master/downloads/installers/update.sh
 algod_net=dev
 algod_token=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

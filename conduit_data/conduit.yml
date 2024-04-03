@@ -1,0 +1,34 @@
+log-level: INFO
+retry-count: 10
+retry-delay: "1s"
+hide-banner: true
+
+api:
+    addr: ":8981"
+
+metrics:
+    mode: OFF
+    addr: ":9999"
+    prefix: "conduit"
+
+importer:
+    name: algod
+    config:
+        mode: "follower"
+        netaddr: "http://127.0.0.1:3999"
+        token: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+
+        catchup-config:
+            admin-token: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+
+processors:
+
+exporter:
+    name: postgresql
+    config:
+        connection-string: "host=localhost port=5432 user=indexer password=indexer dbname=indexer"
+        max-conn: 20
+        delete-task:
+            interval: 0
+            rounds: 100000
+
