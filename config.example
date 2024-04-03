@@ -2,6 +2,7 @@ bin_dir=./bin
 tmp_dir=./tmp
 data_dir=./data
 update_script_uri=https://raw.githubusercontent.com/algorand/go-algorand-doc/master/downloads/installers/update.sh
+algod_net=dev
 algod_token=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 algod_admin_token=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 kmd_token=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

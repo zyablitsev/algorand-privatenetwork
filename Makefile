@@ -7,6 +7,7 @@ v_bin_dir=$(or ${BIN_DIR},${bin_dir})
 v_tmp_dir=$(or ${TMP_DIR},${tmp_dir})
 v_data_dir=$(or ${DATA_DIR},${data_dir})
 v_update_script_uri=$(or ${UPDATE_SCRIPT_URI},${update_script_uri})
+v_algod_net=$(or ${ALGOD_NET},${algod_net})
 v_algod_token=$(or ${ALGOD_TOKEN},${algod_token})
 v_algod_admin_token=$(or ${ALGOD_ADMIN_TOKEN},${algod_admin_token})
 v_kmd_token=$(or ${KMD_TOKEN},${kmd_token})
@@ -42,7 +43,7 @@ network-create: network-stop network-delete
 	${v_bin_dir}/goal network create \
 		-r ${v_data_dir}/privatenetwork/ \
 		-n sandnet \
-		-t ./template.json
+		-t ./template.${v_algod_net}.json
 	cp node-config.json ${v_data_dir}/privatenetwork/Node/config.json
 	echo "${v_algod_token}" > \
 		${v_data_dir}/privatenetwork/Node/algod.token

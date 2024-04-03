@@ -24,7 +24,8 @@
                 "Stake": 10,
                 "Online": false
             }
-        ]
+        ],
+        "RewardsPoolBalance": 0
     },
     "Nodes": [
         {
@@ -52,7 +53,8 @@
                     "Name": "Wallet4",
                     "ParticipationOnly": false
                 }
-            ]
+            ],
+            "ConfigJSONOverride": "{\"EnableFollowMode\":true,\"CatchupBlockValidateMode\":3,\"EndpointAddress\":\"0.0.0.0:3999\", \"EnableTxnEvalTracer\": true, \"MaxAcctLookback\": 256}"
         }
     ]
 }
