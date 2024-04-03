@@ -32,6 +32,7 @@ binaries-download: binaries-clean
 		-p ../${v_bin_dir}/ \
 		-d ../${v_data_dir}
 	./download-indexer.sh
+	./download-conduit.sh
 
 binaries-clean:
 	rm -rf ${v_tmp_dir}/ 2>/dev/null || true
