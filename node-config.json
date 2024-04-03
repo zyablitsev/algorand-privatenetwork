@@ -1,6 +1,11 @@
 {
-  "EndpointAddress": ":4001",
-  "EnableDeveloperAPI": true,
+  "Version": 27,
   "GossipFanout": 1,
-  "DNSBootstrapID": ""
+  "EndpointAddress": "0.0.0.0:4001",
+  "Archival": false,
+  "EnableDeveloperAPI": true,
+  "NetAddress": "127.0.0.1:0",
+  "DNSBootstrapID": "",
+  "EnableTxnEvalTracer": true,
+  "MaxAcctLookback": 256
 }

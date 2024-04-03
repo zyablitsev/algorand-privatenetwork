@@ -1,6 +1,6 @@
 {
     "Genesis": {
-        "NetworkName": "",
+        "NetworkName": "DevModeNet",
         "FirstPartKeyRound": 0,
         "LastPartKeyRound": 30000,
         "Wallets": [
@@ -30,18 +30,13 @@
     },
     "Nodes": [
         {
-            "Name": "Primary",
+            "Name": "Node",
             "IsRelay": true,
             "Wallets": [
                 {
                     "Name": "Wallet1",
                     "ParticipationOnly": false
-                }
-            ]
-        },
-        {
-            "Name": "Node",
-            "Wallets": [
+                },
                 {
                     "Name": "Wallet2",
                     "ParticipationOnly": false
@@ -54,7 +49,11 @@
                     "Name": "Wallet4",
                     "ParticipationOnly": false
                 }
-            ],
+            ]
+        },
+        {
+            "Name": "Follower",
+            "Wallets": [],
             "ConfigJSONOverride": "{\"EnableFollowMode\":true,\"CatchupBlockValidateMode\":3,\"EndpointAddress\":\"0.0.0.0:3999\", \"EnableTxnEvalTracer\": true, \"MaxAcctLookback\": 256}"
         }
     ]
