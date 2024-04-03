@@ -7,16 +7,16 @@ tmpdir=${TMP_DIR:-"./tmp"}
 
 # determine os
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    arch="linux_amd64"
+    arch="linux_x86_64"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    arch="darwin_amd64"
+    arch="darwin_all"
 else
     echo "unsupported arch ${OSTYPE}"
     exit
 fi
 
 # determine the latest version of indexer
-latest_asset=$(curl "https://api.github.com/repos/algorand/indexer/releases" | jq ".[].assets[] | select(.name | contains(\"indexer\") and contains(\"${arch}\"))" | jq -s ".[0]")
+latest_asset=$(curl "https://api.github.com/repos/algorand/indexer/releases" | jq ".[].assets[] | select(.name | ascii_downcase | contains(\"indexer\") and contains(\"${arch}\"))" | jq -s ".[0]")
 latest_asset_id=$(echo ${latest_asset} | jq -r ".id")
 latest_asset_name=$(echo ${latest_asset} | jq -r ".name")
 
@@ -31,9 +31,9 @@ curl \
     -L \
     -H 'accept:application/octet-stream' \
     "https://api.github.com/repos/algorand/indexer/releases/assets/${latest_asset_id}" \
-     | tar -xj -C ${tmpdir}
+     | tar -xz -C ${tmpdir}
 
-mv ${tmpdir}/algorand-indexer*/algorand-indexer ${bindir}/
+mv ${tmpdir}/algorand-indexer ${bindir}/
 rm -rf ${tmpdir}
 
 echo ""
