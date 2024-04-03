@@ -33,7 +33,12 @@ curl \
     "https://api.github.com/repos/algorand/indexer/releases/assets/${latest_asset_id}" \
      | tar -xz -C ${tmpdir}
 
-mv ${tmpdir}/algorand-indexer ${bindir}/
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    mv ${tmpdir}/algorand-indexer ${bindir}/
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    mv ${tmpdir}/indexer ${bindir}/algorand-indexer
+fi
+
 rm -rf ${tmpdir}
 
 echo ""
